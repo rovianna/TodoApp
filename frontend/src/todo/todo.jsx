@@ -18,6 +18,7 @@ export default class Todo extends Component {
         this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
         this.handleMarkAsPending = this.handleMarkAsPending.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.handleClear = this.handleClear.bind(this)
         this.refresh()
     }
 
@@ -55,6 +56,10 @@ export default class Todo extends Component {
         axios.put(`${URL}/${todo._id}`, { ...todo, done: false})
             .then(resp => this.refresh(this.state.description))
     }
+
+    handleClear() {
+        this.refresh()
+    }
     
     render() {
         return (
@@ -64,7 +69,8 @@ export default class Todo extends Component {
                     description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd}
-                    handleSearch={this.handleSearch}/>
+                    handleSearch={this.handleSearch}
+                    handleClear={this.handleClear}/>
                 <TodoList 
                 list={this.state.list}
                 handleMarkAsDone={this.handleMarkAsDone}
